@@ -1,0 +1,56 @@
+<div id="home-content" class="">
+
+  <h4 id="selected-category-name" class="">
+    <strong id="category-selected-name"><%= t(Category.first.name, :default => Category.first.name) %></strong> 
+    <span id="category-selected-recommendations-total"><%= current_user.recomendations_by_category(Category.first.id).count %></span>
+    <%= _("out of") %> 9
+  </h4>
+
+  <div id="categories-icon-scroll" class="">
+    <% @categories.each_with_index do |category, index| %>
+      <div class="category-icon-container " 
+            data-category-id="<%= category.id %>" 
+            data-category-index="<%= index %>" 
+            data-category-emoji="<%= category.emoji %>"
+            data-category-name="<%= t(category.name, :default => category.name) %>"
+            data-category-recommendations-total="<%= current_user.recomendations_by_category(category.id).count %>">
+        <%= category.emoji %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="divider"></div>
+
+  <% @categories.each_with_index do |category, index| %>
+    <ul id="<%= category.id %>" class="category-block <%= index == 0 ? "category-block-selected" : "category-block-unselected" %>"> 
+    
+      <% current_user.recomendations_by_category(category.id).each do |recomendation| %>
+        <li id="<%= recomendation.id %>">
+          <div class="catalog-item">
+            <div class="header-row">
+              <span class="category-item-title"><%= recomendation.title %></span>
+              <img src="/assets/delete.png" onclick="delTip(this)">
+            </div>
+            
+            <div class="content-row">
+              <div class="col">
+                <div class="input-wrapper">
+                  <span>🔗</span>
+                  <input type="text"  placeholder="https://url" onchange="inputTipChange(this)" value="<%= recomendation.url %>">
+                </div>
+                <div class="row">
+                  <img class="thumbnail" src="<%= recomendation.image %>">
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+
+    </ul>
+  <% end %>
+
+  <p id="click-btn-new-link" class=""><%= t("Click on the button bellow and create your first recommendation") %></p>
+  <button id="add-new-link-btn" class="" onclick="addTip()"><%= t("ADD NEW RECOMMENDATION") %></button>
+
+</div>

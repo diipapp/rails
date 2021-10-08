@@ -1,0 +1,26 @@
+<div class="profile_empty_page_container">
+  <div class="header">
+    <h1 class="title">diip</h1>
+  </div>
+  
+  <h3><%= _('Nicely done!') %></h3>
+  <h3><%= _('You are almost there') %></h3>
+  <h5><%= _('Just two more things 👇') %></h5>
+
+    <% current_user.build_profile(name: params[:name], username: params[:username]) if current_user.profile.nil? %>
+    <%= simple_form_for :profile, url: profile_finish_users_path, method: :post, html: { class: 'form-inline' } do |f| %>
+
+      <%= render 'layouts/shared/flash_message' %>
+
+      <br />
+      <%= f.input :name, input_html: {value: current_user.profile.name}, placeholder: _('Name') %>
+      <br />
+      <%= f.input :username, input_html: {value: current_user.profile.username, placeholder: 'Username'} %>
+      <br />
+      <button type="submit" name="commit" value="START" data-disable-with="START" class="btn"><%= _('Start') %></button>
+    <% end %>
+
+  <div class="spacer"></div>
+  <a class="help-btn"><%= _('Help') %></a>
+  
+</div>

@@ -1,0 +1,56 @@
+<div class="catalog-page-container">
+  <div class="header">
+    <h2 id="username">@<%= @user.profile.username %></h2>
+  </div>
+
+  <h4 id="catalog-selected-category-name">
+    <%= t(@categories.first) %>
+  </h4>
+
+  <div id="categories-icon-scroll" class="">
+    <% @categories.each_with_index do |category, index| %>
+
+      <%
+        category_icon_select = ""
+        if index == 0 
+          @user.analytics.increment(@user.id, "category", category[0][0])
+          category_icon_select = "category-icon-selected"
+        end
+      %>
+
+      <div class="category-icon-container <%= "#{category_icon_select}" %>" 
+            data-category-id="<%= category[0][0] %>" 
+            data-category-emoji="<%= category[0][1] %>"
+            data-category-name="<%= t(category[0][3], :default => category[0][3]) %>">
+        
+        <%= category[0][1]%>
+      </div>
+    <% end %>
+    <div class="categories-scroll-spacer"></div>
+  </div>
+
+  <% @categories.each_with_index do |category, index| %>
+    <div id="<%= category[0][0] %>" class="items-grid <%= index == 0 ? "items-grid-selected" : "items-grid-unselected" %>">
+      <% @user.recomendations_by_category(category[0][0]).each do |recomendation| %>
+        <a class="item-container" href="analytics/<%= @user.id %>/tip/<%= recomendation.id %>">
+          <img src="<%= recomendation.image %>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE6U-Ew1nCPKowZkaHwrMieYY_1QEmaMIJk8TsRwfCf3WEW1jxk4li0ts2Z8UtKy6m8FI&usqp=CAU';">
+          <h6><%= recomendation.title %></h6>
+          <span> </span>
+        </a>
+      <% end %>  
+    </div>
+  <% end %>
+
+  <div class="social-links-wrapper">
+    <% @user.profile.social_links.each do |key, value| %>
+      <a id="<%= "#{key}" %>-anchor" href="<%= "#{value}" %>">
+        <%= show_svg("big-#{key}-icon") %>
+      </a>
+    <% end %>
+  </div>
+
+  <%= link_to(new_registration_path(User), id: "create-diip-btn") do %>
+    <p><%= t("create your") %> <strong>diip</strong></p>  
+  <% end %>
+
+</div>

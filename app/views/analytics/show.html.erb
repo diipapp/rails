@@ -1,0 +1,50 @@
+<div id="analytics-content" >
+  <h1><%= t("Overview") %></h1>
+
+  <div class="total-views-row">
+    <div>
+      <h2><%= t("Total Views") %></h2>
+      <label><%= t("Amount of views on your diip") %></label>
+    </div>
+    <span id="analytics-total-views"><%= current_user.hits %></span>
+  </div>
+
+  <div class="divider"></div>
+  
+  <h2 id="categories-title"><%= t("By Categories") %></h2>
+
+  <div id="categories-stats-wrapper">
+    <%= chart_bar_category(current_user) %>
+  </div>
+
+  <div class="divider"></div>
+  
+  <div class="total-views-row">
+    <div>
+      <h2><%= t("Total Links") %> </h2>
+      <label><%= t("Amount of links you recommended") %></label>
+    </div>
+    <span id="total-links-count"><%= current_user.recomendations.count %></span>
+  </div>
+
+  <div class="divider"></div>
+
+  <h2 id="click-by-link-title"><%= t("Clicks by link") %></h2>
+
+  <div id="clicked-diip-tips-wrapper">
+    <% current_user.analytics_by_tips.each do |tip| %>
+      <div class="clicked-diip-tip">
+        <div class="row">
+          <img src="<%= tip.image %>">
+          <div>
+            <h4><%= tip.title %>></h4>
+            <a><%= tip.url %></a>
+          </div>
+        </div>
+        <span><%= tip.total.to_i %></span>
+      </div>
+      <div class="divider-mini"></div>
+    <% end %>
+  </div>
+
+</div>

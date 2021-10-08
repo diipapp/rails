@@ -1,0 +1,122 @@
+.login-page-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 30px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.login-page-container .title {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  color: #000;
+  font-family: pulp_displaybold;
+  
+}
+
+.login-page-container .description {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 36px;
+  margin: 40px 0 40px 0;
+}
+
+.login-page-container .highlight {
+  color: var(--blue1);
+  font-weight: 700;
+  font-family: pulp_displaybold;
+}
+
+.login-page-container .login-text {
+  color: var(--gray1);
+  font-size: 15px;
+  line-height: 18px;
+  text-align: center;
+}
+
+.login-page-container .auth-input {
+  border: none;
+  background-color: var(--gray6);
+  border-radius: 15px;
+  width: 100%;
+  height: 60px;
+  box-sizing: border-box;
+  padding: 22px 17px;
+  color: var(--gray1);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  margin-top: 20px;
+  display: flex;
+}
+
+.login-page-container .login-buttons-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0 20px 0;
+}
+
+.login-page-container #facebook-btn,
+.login-page-container #google-btn {
+  width: calc((100vw - 60px)/2 - 9px);
+  height: 60px;
+  background: #ffffff;
+  /* Gray 6 */
+
+  border: 1px solid var(--gray6);
+  box-sizing: border-box;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px 22px;
+  text-align: center;
+
+  justify-content: center;
+}
+
+.login-page-container #facebook-btn {
+  display: flex;
+  background-color: #fff;
+}
+
+.login-page-container #google-btn {
+  display: flex;
+  background-color: #fff;
+}
+
+.login-page-container .spacer {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page-container .error {
+  width: calc(100% - 60px);
+  height: 25px;
+  background-color: var(--red);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray6);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.login-page-container #privacy-btn {
+  color: var(--gray3);
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  border: none;
+  background-color: inherit;
+}

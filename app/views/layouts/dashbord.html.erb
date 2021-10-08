@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= get_user_name %> | diip</title>
+    <meta name="description" content="<%= _('diip. Create your own recommendation catalog') %>">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" type="image/png" href="<%= asset_path('favicon.png') %>">
+
+    <!-- ogs -->
+    <meta property="og:title" content="<%= get_user_name %> | diip" />
+    <meta property="og:description" content="<%= _('diip. Create your own recommendation catalog') %>" />
+    <meta property="og:url" content="https://www.diip.tips/" />
+    <meta property="og:image" content="https://www.diip.tips/og_user.jpg" />
+    <meta property="og:type" content="website" />
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  </head>
+
+  <body>
+
+    <div class="admin-page-container">
+
+      <div id="clipboard-appender"></div>
+      
+      <div id="header-home" class="header">
+        <h2 id="username">
+          <strong><%= _('My') %>:</strong> 
+          <a id="diip-link" target="_blank" href="<%= current_user.profile.username %>">
+            diip.tips/<%= current_user.profile.username %>
+          </a>
+        </h2>
+
+        <div class="row">
+          <button id="show-catalogs-btn" onclick="copyDiipLink()"><%= show_svg('catalogs-blue', id: "show-catalogs-btn-img") %></button>
+
+          <%= link_to(edit_user_registration_path) do %>
+            <button id="show-settings-btn">
+              <%= show_svg('settings', id: "show-settings-btn-img") %>
+            </button>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="tabs-row">
+        <%
+          menu_active_tips = (params[:controller] == "dashboard") ? "menu-dashbord-active" : ""
+          menu_active_analytics = (params[:controller] == "analytics") ? "menu-dashbord-active" : ""
+        %>
+        <%= link_to _("Tips"), root_user_path, class: "menu-dashbord #{menu_active_tips}" %>
+        <%= link_to _("Analytics"), analytics_path, class: "menu-dashbord #{menu_active_analytics}" %>
+      </div>
+
+      <div id="contents-row" class="contents-row show-home">
+        <%= yield %>
+        <a id="help-btn" href="mailto:wazzup@diip.tips?subject=Help"><%= t("Help | beta 0.5") %></a>
+      </div>
+
+    </div>
+  </body>
+
+  <script>
+    var text_are_you_are   = '<%= "Are you sure?" %>'
+    var text_are_you_are_2 = '<%= "Once deleted, you will not be able to recover this imaginary file!" %>'
+    var text_remove_sucess = '<%= "! Your imaginary file has been deleted!" %>'
+  </script>
+
+  <%= javascript_include_tag 'application-dashboard' %>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YX463W8HJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9YX463W8HJ');
+  </script>
+
+</html>

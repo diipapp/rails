@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>diip</title>
+    <meta name="description" content="Dê um toque especial aos seus perfis sociais com um lugar organizado para recomendar mídias, livros, produtos e muito mais!">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" type="image/png" href="<%= asset_path('favicon.png') %>">
+
+    <!-- ogs -->
+    <meta property="og:title" content="diip | Crie seu catálogo de recomendações" />
+    <meta property="og:description" content="Dê um toque especial aos seus perfis sociais com um lugar organizado para recomendar mídias, livros, produtos e muito mais!" />
+    <meta property="og:url" content="https://www.diip.app/" />
+    <meta property="og:image" content="https://www.diip.app/og_main.jpg" />
+    <meta property="og:type" content="website" />
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+
+  <%= javascript_include_tag "application-login" %>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YX463W8HJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9YX463W8HJ');
+  </script>  
+</html>

@@ -1,0 +1,16 @@
+<div class="email-to-recover-password-page-container">
+<h1 class="title">diip</h1>
+  <h3 class="information-text"><%= _('Please, put your account email') %></h3>
+  <p class="information-description"><%= _('We’ll send an email with the instructions') %></p>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+    <%= f.email_field :email, autocomplete: "email", class: "auth-input", placeholder: "E-mail" %>
+    <button type="submit" name="commit" id="confirm-btn"><%= _('Continue') %></button>
+
+    <%= render "devise/shared/error_messages", resource: resource %>
+  <% end %>
+
+  <div class="spacer"></div>
+
+  <button id="privacy-btn"><%= _('Privacy') %></button>
+</div>

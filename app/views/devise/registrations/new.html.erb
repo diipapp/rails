@@ -1,0 +1,45 @@
+<div class="signin-page-container">
+
+  <h1 class="title">diip</h1>
+  <p class="signin-text">Sign up for your diip account</p>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+  <div class="login-buttons-row">
+
+    <%- if devise_mapping.omniauthable? %>
+      <%#- resource_class.omniauth_providers.each do |provider| %>
+        <%#- if provider.to_s == "google_oauth2" %>
+          <%#= link_to(omniauth_authorize_path(resource_name, provider), method: :post) do %>
+          <div id="google-btn">
+            <%= show_svg('google-icon') %>
+            <span>GOOGLE</span>
+          </div>
+          <%# end %>
+        <%# end %>
+
+        <%#- if provider.to_s == "facebook" %>
+          <%#= link_to(omniauth_authorize_path(resource_name, provider), method: :post) do %>
+            <div id="google-btn">
+              <%= show_svg('facebook-icon') %>
+              <span>FACEBOOK</span>
+            </div>
+          <%# end %>
+        <%# end %>
+
+      <%# end %>
+    <% end %>
+
+  </div>
+
+  <% end %>
+
+  <p class="privacy-alert">By using this service you are agreeing to the terms of service and privacy policy</p>
+
+  <div class="spacer">
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= link_to('Already have an account?', new_user_session_path, id:"has-acount-btn") %>
+  </div>
+  
+  <button id="privacy-btn">Privacy</button>
+</div>

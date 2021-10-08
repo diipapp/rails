@@ -1,0 +1,144 @@
+<div class="admin-page-container">
+
+  <div id="header-settings" class="header">
+    <div class="row" id="close-settings-btn" >
+      <%= show_svg('arrow-left') %>
+      <p><%= link_to _("Back"), root_user_path %></p>
+    </div>
+  </div>
+
+  <div id="contents-row" class="contents-row show-home">  
+    <div id="settings-content" class="">
+      <h3><%= _("Your informations") %></h3>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <%= f.fields_for :profile, current_user.profile  do |ff| %>
+          <%= ff.text_field :name, placeholder: _("Name") %>  
+          <%= ff.text_field :username, placeholder: "username" %>  
+
+          <div class="divider"></div>
+          <h3 class="social-links-header"><%= _("Social Links")  %></h3>
+          <div id="links-info-list" class="">
+            <div class="input-wrapper">
+              
+            <div class="img-wrapper">
+              <%= show_svg('spotify-icon') %>
+              </div>
+              <%= ff.text_field :spotify, placeholder: "Spotify", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('youtube-icon') %>
+              </div>
+              <%= ff.text_field :youtube, placeholder: "YouTube", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('twitter-icon') %>
+              </div>
+              <%= ff.text_field :twitter, placeholder: "Twitter", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('twitch-icon') %>
+              </div>
+              <%= ff.text_field :twitch, placeholder: "Twitch", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('tiktok-icon') %>
+              </div>
+              <%= ff.text_field :tiktok, placeholder: "Tiktok", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('instagram-icon') %>
+              </div>
+              <%= ff.text_field :instagram, placeholder: "Instagram", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('pinterest-icon') %>
+              </div>
+              <%= ff.text_field :pinterest, placeholder: "Pinterest", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('site-icon') %>
+              </div>
+              <%= ff.text_field :site, placeholder: "Site", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('facebook_link_icon') %>
+              </div>
+              <%= ff.text_field :facebook, placeholder: "Facebook", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+              <div class="img-wrapper">
+              <%= show_svg('medium_icon') %>
+              </div>
+             
+              <%= ff.text_field :medium, placeholder: "Medium", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('behance_icon') %>
+              </div>
+              <%= ff.text_field :behance, placeholder: "Behance", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+              <%= show_svg('linkedin_icon') %>
+              </div>
+              <%= ff.text_field :linkedin, placeholder: "Linkedin", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+            <div class="img-wrapper">
+            <%= show_svg('whatsapp_icon') %>
+            </div>
+              
+              <%= ff.text_field :whatsapp, placeholder: "WhatsApp", class: "link-info-item" %>  
+            </div>
+            <div class="input-wrapper">
+              <div class="img-wrapper">
+              <%= show_svg('email_icon') %>
+              </div>
+             
+              <%= ff.text_field :email, placeholder: "Email", class: "link-info-item" %>  
+            </div>                         
+          </div>
+
+        <% end %>
+
+        <div class="divider"></div>
+        <h3 class="social-links-header"><%= _("Security")  %></h3>
+        <%= f.password_field :password, placeholder: _("Password") %>
+        <%= f.password_field :password_confirmation, placeholder: _("Password Confirmation") %>
+
+        <button type="submit" name="commit" id="save-profile-btn"><%= _("Save Profile") %></button>
+      <% end %>
+
+      <div class="divider"></div>
+        <h3>Extras</h3>
+        <a href="mailto:wazzup@diip.tips?subject=Help"><%= _("Help") %></a>
+
+        <a href="mailto:wazzup@diip.tips?subject=Feedback!">Feedback</a>
+
+        <%= link_to(_("Logout"), destroy_user_session_path, method: :delete, id: "logout-btn") %>
+        
+        <%#= link_to 'DELETE ACCOUNT', registration_path(current_user), :data => {:confirm => 'Are you sure?'}, id: "delete-account-btn" %>
+        <%= button_to _("Delete Accout"), registration_path(current_user), data: { confirm: _("Are you sure?") }, method: :delete, id: "delete-account-btn" %>
+       
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+

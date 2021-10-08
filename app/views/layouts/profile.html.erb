@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= get_user_name %> | diip</title>
+    <meta name="description" content="<%= _('diip. Create your own recommendation catalog') %>">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="icon" type="image/png" href="<%= asset_path('favicon.png') %>">
+
+    <!-- ogs -->
+    <meta property="og:title" content="<%= get_user_name %> | diip" />
+    <meta property="og:description" content="<%= _('diip. Create your own recommendation catalog') %>" />
+    <meta property="og:url" content="https://www.diip.tips/" />
+    <meta property="og:image" content="https://www.diip.tips/og_user.jpg" />
+    <meta property="og:type" content="website" />
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+
+  <body data-user-id="<%= @user.id if @user.present? %>">
+    <%= yield %>
+  </body>
+
+  <%= javascript_include_tag 'application-profile' %>
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YX463W8HJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-9YX463W8HJ');
+  </script>
+
+</html>
