@@ -5,18 +5,12 @@ document.addEventListener("DOMContentLoaded", function(event)
     div_categories_icons.forEach(function(element, key) {
       
       element.addEventListener('click', function () {
-        categoryChangeStatus(element, key);
         categoryToggle(element, key);
       });
 
     });
   }
 });
-
-function categoryChangeStatus(element, key)
-{
-  document.getElementById("catalog-selected-category-name").innerHTML = element.dataset.categoryName;
-}
 
 function categoryToggle(element, key) 
 {

@@ -1,11 +1,22 @@
 <div class="catalog-page-container">
   <div class="header">
-    <h2 id="username">@<%= @user.profile.username %></h2>
-  </div>
+    <div class="row">
+      <div id="username" class="col">
+        <h2>
+          @<%= @user.profile.username %>
+        </h2>        
+      </div>
 
-  <h4 id="catalog-selected-category-name">
-    <%= t(@categories.first) %>
-  </h4>
+      <% if user_signed_in? %>
+        <div class="col">
+          <div id="user_settings">
+              ⚙️
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
 
   <div id="categories-icon-scroll" class="">
     <% @categories.each_with_index do |category, index| %>

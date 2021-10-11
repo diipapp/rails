@@ -27,20 +27,25 @@
     <div class="admin-page-container">
       
       <div id="header-home" class="header">
-        <h2 id="username">
-          <strong>Meu Link:</strong> 
-          <a id="diip-link" target="_blank" href="<%= current_user.profile.username %>">
-            diip.app/<%= current_user.profile.username %>
-          </a>
-        </h2>
-
+      
         <div class="row">
-          <%= link_to(edit_user_registration_path) do %>
-            <button id="show-settings-btn">
-              <%= show_svg('settings', id: "show-settings-btn-img") %>
-            </button>
-          <% end %>
+          <div id="username" class="col">
+            <h2>
+              <strong>Meu Link:</strong> 
+              <a id="diip-link" target="_blank" href="<%= current_user.profile.username %>">
+                diip.app/<%= current_user.profile.username %>
+              </a>
+            </h2>        
+          </div>
+          <div class="col">
+            <div id="user_settings">
+              <%= link_to(edit_user_registration_path) do %>
+                ⚙️
+              <% end %>
+            </div>
+          </div>
         </div>
+
       </div>
 
       <div class="divider"></div>
