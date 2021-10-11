@@ -55,11 +55,13 @@ class Users::PiidController < ApplicationController
       else
         response = HTTParty.get("https://opengraph.io/api/1.1/site/#{CGI.escape(link)}?accept_lang=auto&use_proxy=true&app_id=69d07e6b-13fc-4215-915d-8fbf529db9a2", format: :json)
        
+        
+
         if response.code == 200 
           body = JSON.parse(response.body)
-          
+
           og_title = body['hybridGraph']['title']
-          og_image = body['hybridGraph']['image']
+          og_image = body['hybridGraph']['image'] || body['hybridGraph']['imageSecureUrl']
         end 
       end
     
