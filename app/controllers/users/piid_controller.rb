@@ -1,28 +1,33 @@
 class Users::PiidController < ApplicationController
   
   skip_before_action :verify_authenticity_token, only: [:capture]
-  # skip_before_action :authenticate_user!, :verify_user_have_username
 
   def capture
     og_title, og_image = extract(params[:link])
 
-    tip_id = params[:tip_id]
-    if tip_id.present?
-      recommendation = current_user.recomendations.where(id: tip_id).last
-      return not_found_crude unless recommendation.present?
+    unless og_title.nil? || og_image.nil? 
 
-      recommendation.update(title: og_title, image: og_image, url: params[:link])
+      tip_id = params[:tip_id]
+      if tip_id.present?
+        recommendation = current_user.recomendations.where(id: tip_id).last
+        return not_found_crude unless recommendation.present?
+
+        recommendation.update(title: og_title, image: og_image, link: params[:link])
+      else
+        category = Category.find_by_id(params[:category_id])
+        return not_found_crude unless category.present?
+
+        current_user.recomendations.new(category_id: category.id,
+                                        title: og_title, 
+                                        image: og_image, 
+                                        link: params[:link]).save!
+      end
+
+      render json: {og_title: og_title, og_image: og_image}, status: 200
     else
-      category = Category.find_by_id(params[:category_id])
-      return not_found_crude unless category.present?
-
-      current_user.recomendations.new(category_id: category.id,
-                                      title: og_title, 
-                                      image: og_image, 
-                                      url: params[:link]).save!
+      render json: {}, status: 404
     end
 
-    render json: {og_title: og_title, og_image: og_image}, status: 200
   end
 
   private
@@ -44,12 +49,14 @@ class Users::PiidController < ApplicationController
         og_title = page.at('meta[property="og:title"]')['content']
         og_image = page.at('meta[property="og:image"]')['content']
       else
-        url_base = CGI.escape(link)
-        url = URI("https://opengraph.io/api/1.1/site/#{url_base}?accept_lang=auto&use_proxy=true&app_id=100c86c1-fac2-4770-9fee-238d8d0d11a1")
-        response = JSON.parse(Net::HTTP.get(url))
-  
-        og_title = response['hybridGraph']['title']
-        og_image = response['hybridGraph']['image']  
+        response = HTTParty.get("https://opengraph.io/api/1.1/site/#{CGI.escape(link)}?accept_lang=auto&use_proxy=true&app_id=69d07e6b-13fc-4215-915d-8fbf529db9a2", format: :json)
+       
+        if response.code == 200 
+          body = JSON.parse(response.body)
+          
+          og_title = body['hybridGraph']['title']
+          og_image = body['hybridGraph']['image']
+        end 
       end
     
       [og_title, og_image]
@@ -102,6 +109,6 @@ class Users::PiidController < ApplicationController
       raise 'Too many http redirects' if attempts == max_attempts
   
       uri_str
-    end   
+    end       
 
 end

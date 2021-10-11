@@ -6,6 +6,8 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+Dotenv::Railtie.load
+
 module DockerRails
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -16,5 +18,10 @@ module DockerRails
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.assets.enabled = true    
+
+    config.hosts = [
+      "localhost",
+      "0281-2804-14c-9b83-8f0f-8c17-1620-652a-966e.ngrok.io"
+    ]    
   end
 end

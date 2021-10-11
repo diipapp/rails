@@ -16,8 +16,7 @@ document.addEventListener("DOMContentLoaded", function(event)
 
 function categoryChangeStatus(element, key)
 {
-  document.getElementById("category-selected-name").innerHTML = element.dataset.categoryName;
-  document.getElementById("category-selected-recommendations-total").innerHTML = element.dataset.categoryRecommendationsTotal;
+  document.getElementById("add-new-tip-category-name").innerHTML = element.dataset.categoryName;
 }
 
 function categoryToggle(element, key) 
@@ -40,61 +39,92 @@ function categoryToggle(element, key)
   } 
 }
 
-function addTip()
-{
-  category_id = document.querySelector(".category-icon-selected").dataset.categoryId
-  category_ul = document.querySelector(`#${CSS.escape(category_id)}`)
+function add() {
+  let category_id = document.querySelectorAll(".category-icon-selected")[0].dataset.categoryId;
+  let link        = document.getElementById("url");
+  
+  if (validURL(link.value)) {
+    loader_link(link);
 
-  content_clone = `
-    <div class="catalog-item">
-      <div class="header-row">
-        <span class="category-item-title">title</span>
-        <img src="/assets/delete-2138c3ba66ecfb8e10fdf217b2282282b55b63a8e5256d8d321c3a9f636c2a61.png" onclick="delTip(this)">
-      </div>
+    let set_params = {
+      method: "POST", 
+      url: "/users/piid",
+      post_params: "category_id="+category_id+"&link="+link.value             
+    }
+
+    send_request(set_params, function(status, result) {
       
-      <div class="content-row">
-        <div class="col">
-          <div class="input-wrapper">
-            <span>🔗</span>
-            <input type="text" placeholder="https://url" onchange="inputTipChange(this)">
-          </div>
-          <div class="row">
-            <img class="thumbnail" src="/assets/placeImg-bf1410dd9367395877f232948cc1fb045f54e107bcb2a4c3d1b31d0b04f1d641.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
+      if (status == 404) {
+        swal("", "Desculpe, não conseguimos entender esse link, já enviamos esse erro aos nossos time.", "error");
 
-  li = document.createElement("li");
-  li.innerHTML = content_clone;
+        error_extract_link = `
+          <div id="error_404">
+            <p class="emoji">😔</p>
+            <p></p>
+          </div>
+        `;
+    
+        // document.getElementById("new-tip-aling-middle").innerHTML = error_extract_link
+      } else {
+        swal("", "Link adicionado com sucesso.", "success");
+      }
 
-  category_ul.appendChild(li);
+      // var ul_category    = document.getElementById(category_id);
+      // var last_li = ul_category.children[ul_category.children.length - 1];
+
+      
+
+      // ul.find('li:first').clone(true).appendTo(ul);
+
+      // let node = document.createElement("li");
+
+      // content_loading = `
+      //   <div class="catalog-item">
+          
+      //     <div class="header-row">
+      //       <span class="category-item-title">Titulo</span>
+      //       <img src="/assets/delete.png" onclick="delTip(this)">
+      //     </div>
+
+      //       <div class="content-row">
+      //       <div class="col">
+      //         <div class="row">
+      //           <img class="thumbnail" src="<%= recomendation.image %>">
+      //         </div>
+      //       </div>
+      //     </div>
+
+      //   </div>`;
+
+      // let textnode = document.createTextNode(content_loading);
+      // node.appendChild(textnode);
+
+      // document.getElementById(category_id).appendChild(node);
+    });
+  }
 }
 
-function inputTipChange(element)
-{
-  li_category_id_id = element.closest("ul").getAttribute("id")
-  li_tip_id = element.closest("li")
+function loader_link(link) {
+  if (link.value) {
+    content_loading = `
+    <div id="loader">
+      <div class="loader loader-9">
+        <svg class="loader-star star1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="23.172px" height="23.346px" viewBox="0 0 23.172 23.346" xml:space="preserve">
+          <polygon fill="#2f80ed" points="11.586,0 8.864,8.9 0,8.9 7.193,14.447 4.471,23.346 11.586,17.84 18.739,23.346 16.77,14.985 23.172,8.9 14.306,8.9" />
+        </svg>
+        <svg class="loader-star star2" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="23.172px" height="23.346px" viewBox="0 0 23.172 23.346" xml:space="preserve">
+          <polygon fill="#2f80ed" points="11.586,0 8.864,8.9 0,8.9 7.193,14.447 4.471,23.346 11.586,17.84 18.739,23.346 16.77,14.985 23.172,8.9 14.306,8.9  " />
+        </svg>
+        <svg class="loader-star star3" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="23.172px" height="23.346px" viewBox="0 0 23.172 23.346" xml:space="preserve">
+          <polygon fill="#2f80ed" points="11.586,0 8.864,8.9 0,8.9 7.193,14.447 4.471,23.346 11.586,17.84 18.739,23.346 16.77,14.985 23.172,8.9 14.306,8.9  " />
+        </svg>
+      </div>
+    </div>`;
 
-  li_tip_id.querySelector(".thumbnail").src = '/assets/loading.gif';
-
-  if (li_tip_id.hasAttribute('id') == true) {
-    post_params = "category_id="+li_category_id_id+"&tip_id="+li_tip_id.getAttribute("id")+"&link="+element.value  
+    document.getElementById("new-tip-aling-middle").innerHTML = content_loading
   } else {
-    post_params = "category_id="+li_category_id_id+"&link="+element.value  
+    link.classList.add('shake');
   }
-
-  set_params = {method: "POST", 
-                url: "/users/piid",
-                post_params: post_params           
-  }
-
-  send_request(set_params, function(result) {
-    li_tip_id.querySelector(".category-item-title").innerHTML = result['og_title'];
-    li_tip_id.querySelector(".thumbnail").src = result['og_image'];
-  });
-
 }
 
 function delTip(element)

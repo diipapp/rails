@@ -5,7 +5,7 @@ class CreateRecomendation < ActiveRecord::Migration[6.0]
       t.belongs_to :category, null: false, type: :uuid, foreign_key: true, index: true
 
       t.string :title
-      t.string :url
+      t.string :link, limit: 2083
       t.string :image
       t.string :price
       t.boolean :visible

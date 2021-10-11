@@ -5,8 +5,8 @@ class Recomendation < ApplicationRecord
   has_many :analytics, -> { where type_analytic: "tip" }, foreign_key: :type_id, primary_key: :id
 
   validates_associated :user, :category
-  validates :title, :url, :image, presence: true
-  validates :url, url: true
+  validates :title, :link, :image, presence: true
+  validates :link, format: URI::regexp(%w[http https])
   
   validate  :limits_by_category
  

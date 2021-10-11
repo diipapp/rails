@@ -15,15 +15,12 @@
 
 .admin-page-container .header {
   display: flex;
-  width: calc(100% - 60px);
   justify-content: space-between;
-  margin: 0 30px 0 30px;
   padding-top: 8px;
-  height: 72px;
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
-  border-bottom: 1px solid var(--gray6);
+  margin-left: 15px;
 }
 
 .admin-page-container .header .row {
@@ -53,8 +50,6 @@
 
 .admin-page-container #show-settings-btn {
   width: 54px;
-  height: 54px;
-  border: 2px solid var(--gray6);
   box-sizing: border-box;
   border-radius: 20px;
   margin-left: 13px;
@@ -87,21 +82,21 @@
   flex-direction: row;
   overflow-x: scroll;
   width: 100%;
-  height: 80px;
 }
 
 .admin-page-container #categories-icon-scroll::-webkit-scrollbar {
   display: none;
 }
 .admin-page-container .divider {
-  width: calc(100% - 60px);
+  width: 100%;
   height: 1px;
   background-color: var(--gray6);
-  margin-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 20px;  
 }
 
 .category-icon-container {
-  margin-left: 20px;
+  margin-right: 13px;
   width: 54px !important;
   height: 54px;
   background-color: #ffffff;
@@ -121,7 +116,7 @@
 }
 
 .category-icon-container:first-of-type {
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .admin-page-container #items-grid {
@@ -239,9 +234,9 @@
   font-size: 15px;
   line-height: 18px;
   color: var(--gray1);
-  margin: 30px;
-  margin-bottom: 10px;
+  margin: 0px 17px 17px 17px;
   font-weight: 400;
+  text-align: center;
 }
 
 .admin-page-container #add-new-link-btn {
@@ -258,8 +253,10 @@
   align-items: center;
   box-sizing: border-box;
   padding-left: 17px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 30px;
+  text-align: center;
+  display:table-cell;
 }
 
 .admin-page-container #add-new-link-btn.disabled {
@@ -273,8 +270,6 @@
   box-sizing: border-box;
   padding: 0 10px;
   justify-content: space-between;
-  margin-top: 24px;
-  margin-bottom: 12px;
 }
 
 .admin-page-container .header-row span {
@@ -290,18 +285,16 @@
   flex-direction: row;
   justify-content: space-between;
   background-origin: border-box;
-  padding: 10px 0 30px 0;
 }
 
 .admin-page-container .catalog-item .content-row input {
   display: flex;
-  height: 40px;
+  height: 60px;
   background-color: var(--gray6);
   border-radius: 15px;
   border: none;
   box-sizing: border-box;
-  padding-left: 38px;
-  padding-right: 20px;
+  padding-left: 10px;
   width: 100%;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
@@ -351,6 +344,10 @@
   border-radius: 15px;
   margin-right: 20px;
   object-fit: cover;
+}
+
+ul .catalog-item {
+  margin-bottom: 30px;
 }
 
 .switch__container {
@@ -662,11 +659,8 @@
   flex-direction: row;
   align-items: center;
   box-sizing: border-box;
-  height: 58px;
   color: var(--blue1);
-  border-bottom: 1px solid var(--gray6);
-  width: calc(100vw - 60px);
-  margin-left: 30px;
+  margin-left: 15px;
 }
 
 .admin-page-container .tabs-row #recommendations-tab-btn {
@@ -847,4 +841,76 @@
 
 .category-block-unselected {
   display: none;
+}
+
+.admin-page-container #add-new-tip-category-name {
+  color: var(--blue1);
+}
+
+.admin-page-container #new-tip {
+  display: table;
+  width: 100%;
+  height: 190px;
+}
+
+.admin-page-container #new-tip .shake {
+  animation: shake 0.2s ease-in-out 0s 2;
+}
+
+.admin-page-container #new-tip #new-tip-aling-middle {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.admin-page-container #new-tip #new-tip-aling-middle #loader {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#error_404 .emoji {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+/* ----------------     LOADER    ----------------- */
+
+.loader-9 .star1 {
+    -webkit-animation: stars-pulse 1s ease-in-out infinite;
+    animation: stars-pulse 1s ease-in-out infinite;
+    left: 0;
+}
+
+.loader-9 .star2 {
+    -webkit-animation: stars-pulse 1s 0.2s ease-in-out infinite;
+    animation: stars-pulse 1s 0.2s ease-in-out infinite;
+    left: 25px;
+}
+
+.loader-9 .star3 {
+    -webkit-animation: stars-pulse 1s 0.4s ease-in-out infinite;
+    animation: stars-pulse 1s 0.4s ease-in-out infinite;
+    left: 50px;
+}
+
+@keyframes shake {
+  0% { margin-left: 0rem; }
+  25% { margin-left: 0.5rem; }
+  75% { margin-left: -0.5rem; }
+  100% { margin-left: 0rem; }
+}
+
+@-webkit-keyframes stars-pulse {
+    0%,
+    100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+        opacity: 1;
+    }
+    80% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+        opacity: 0;
+    }
 }

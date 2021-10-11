@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_03_26_005507) do
     t.uuid "user_id", null: false
     t.uuid "category_id", null: false
     t.string "title"
-    t.string "url"
+    t.string "link", limit: 2083
     t.string "image"
     t.string "price"
     t.boolean "visible"

@@ -27,11 +27,11 @@ gem 'omniauth-google-oauth2' # https://github.com/omniauth/omniauth/wiki/Resolvi
 gem 'omniauth-facebook'
 gem 'simple_form'
 gem 'sixarm_ruby_unaccent'
-gem "validate_url"
 gem 'metainspector'
 gem 'sendgrid-ruby'
 gem 'apexcharts'
 gem "punching_bag"
+gem 'httparty'
 
 # Frontend
 gem 'sass-rails', '~> 5.0'
@@ -42,6 +42,7 @@ gem 'jquery-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
 end
 
 group :development do

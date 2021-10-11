@@ -9,4 +9,8 @@ class Category < ApplicationRecord
     self.slug = I18n.transliterate(self.name).downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 
+  def id_format_number
+    self.id.gsub(/[^\w]/, '')
+  end
+
 end
