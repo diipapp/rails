@@ -10,9 +10,9 @@
       <% if user_signed_in? %>
         <div class="col">
           <div id="user_settings">
-            <a href="https://www.diip.app/">
+            <%= link_to(root_user_path) do %>
               ⚙️
-            </a>
+            <% end %>
           </div>
         </div>
       <% end %>
