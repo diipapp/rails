@@ -45,7 +45,7 @@
   <% @categories.each_with_index do |category, index| %>
     <div id="<%= category[0][0] %>" class="items-grid <%= index == 0 ? "items-grid-selected" : "items-grid-unselected" %>">
       <% @user.recomendations_by_category(category[0][0]).each do |recomendation| %>
-        <a class="item-container" href="analytics/<%= @user.id %>/tip/<%= recomendation.id %>">
+        <a class="item-container" target="_blank" href="analytics/<%= @user.id %>/tip/<%= recomendation.id %>" >
           <img src="<%= recomendation.image %>" onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE6U-Ew1nCPKowZkaHwrMieYY_1QEmaMIJk8TsRwfCf3WEW1jxk4li0ts2Z8UtKy6m8FI&usqp=CAU';">
           <h6><%= recomendation.title %></h6>
           <span> </span>
