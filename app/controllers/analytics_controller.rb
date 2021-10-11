@@ -16,7 +16,7 @@ class AnalyticsController < ApplicationController
     
     @user.analytics.increment(@user.id, params['type_analytic'], params['type_id'])
 
-    redirect_to @tip.url if params[:type_analytic] == "tip"
+    redirect_to @tip.link if params[:type_analytic] == "tip"
   end  
 
   private

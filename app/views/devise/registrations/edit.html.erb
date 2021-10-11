@@ -3,24 +3,24 @@
   <div id="header-settings" class="header">
     <div class="row" id="close-settings-btn" >
       <%= show_svg('arrow-left') %>
-      <p><%= link_to _("Back"), root_user_path %></p>
+      <p><%= link_to "Voltar", root_user_path %></p>
     </div>
   </div>
 
   <div id="contents-row" class="contents-row show-home">  
     <div id="settings-content" class="">
-      <h3><%= _("Your informations") %></h3>
+      <h3>Suas informações</h3>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <%= f.fields_for :profile, current_user.profile  do |ff| %>
-          <%= ff.text_field :name, placeholder: _("Name") %>  
+          <%= ff.text_field :name, placeholder: "Nome" %>  
           <%= ff.text_field :username, placeholder: "username" %>  
 
           <div class="divider"></div>
-          <h3 class="social-links-header"><%= _("Social Links")  %></h3>
+          <h3 class="social-links-header">Redes Sociais</h3>
           <div id="links-info-list" class="">
             <div class="input-wrapper">
               
@@ -115,23 +115,22 @@
         <% end %>
 
         <div class="divider"></div>
-        <h3 class="social-links-header"><%= _("Security")  %></h3>
-        <%= f.password_field :password, placeholder: _("Password") %>
-        <%= f.password_field :password_confirmation, placeholder: _("Password Confirmation") %>
+        <h3 class="social-links-header">Segurança</h3>
+        <%= f.password_field :password, placeholder: "Senha" %>
+        <%= f.password_field :password_confirmation, placeholder: "Confirme sua senha" %>
 
-        <button type="submit" name="commit" id="save-profile-btn"><%= _("Save Profile") %></button>
+        <button type="submit" name="commit" id="save-profile-btn">Salvar</button>
       <% end %>
 
       <div class="divider"></div>
         <h3>Extras</h3>
-        <a href="mailto:wazzup@diip.tips?subject=Help"><%= _("Help") %></a>
+        <a href="mailto:alan@diip.app?subject=Help">Ajuda</a>
 
-        <a href="mailto:wazzup@diip.tips?subject=Feedback!">Feedback</a>
+        <a href="mailto:alan@diip.app?subject=Feedback!">Feedback</a>
 
-        <%= link_to(_("Logout"), destroy_user_session_path, method: :delete, id: "logout-btn") %>
+        <%= link_to("Sair", destroy_user_session_path, method: :delete, id: "logout-btn") %>
         
-        <%#= link_to 'DELETE ACCOUNT', registration_path(current_user), :data => {:confirm => 'Are you sure?'}, id: "delete-account-btn" %>
-        <%= button_to _("Delete Accout"), registration_path(current_user), data: { confirm: _("Are you sure?") }, method: :delete, id: "delete-account-btn" %>
+        <%= button_to "Deletar minha conta.", registration_path(current_user), data: { confirm: "Tem certeza? =/" }, method: :delete, id: "delete-account-btn" %>
        
       </div>
     </div>
