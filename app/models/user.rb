@@ -64,7 +64,7 @@ class User < ApplicationRecord
   end  
 
   def recomendations_by_category(category_id)
-    recomendations.where(category_id: category_id)
+    recomendations.where(category_id: category_id).order(created_at: :desc)
   end
 
   def analytics_by_categories

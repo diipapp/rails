@@ -40,7 +40,8 @@ function categoryToggle(element, key)
 }
 
 function add() {
-  let category_id = document.querySelectorAll(".category-icon-selected")[0].dataset.categoryId;
+  let category_id          = document.querySelectorAll(".category-icon-selected")[0].dataset.categoryId;
+  let block_insert_new_tip = document.getElementById("new-tip-aling-middle").innerHTML
   let link        = document.getElementById("url");
   
   if (validURL(link.value)) {
@@ -54,52 +55,35 @@ function add() {
 
     send_request(set_params, function(status, result) {
       
-      if (status == 404) {
-        swal("", "Desculpe, não conseguimos entender esse link, já enviamos esse erro aos nossos time.", "error");
+      document.getElementById("new-tip-aling-middle").innerHTML = block_insert_new_tip
 
-        error_extract_link = `
-          <div id="error_404">
-            <p class="emoji">😔</p>
-            <p></p>
-          </div>
-        `;
-    
-        // document.getElementById("new-tip-aling-middle").innerHTML = error_extract_link
+      if (status == 404) {
+        swal("", "Desculpe, não conseguimos entender esse link, já enviamos esse erro aos nossos time, tente enviar um outro link.", "error");
       } else {
         swal("", "Link adicionado com sucesso.", "success");
+
+        let new_li = `
+        <li id="` + result.tip_id + `">
+          <div class="catalog-item">
+
+          <div class="header-row">
+          <span class="category-item-title">` + result.og_title + `</span>
+          <img src="/assets/delete.png" onclick="delTip(this)">
+          </div>
+
+          <div class="content-row">
+          <div class="col">
+            <div class="row">
+              <img class="thumbnail" src="` + result.og_image + `">
+            </div>
+          </div>
+          </div>
+
+          </div>
+        </li>`;
+
+        document.getElementById(category_id).insertAdjacentHTML('afterbegin', new_li)        
       }
-
-      // var ul_category    = document.getElementById(category_id);
-      // var last_li = ul_category.children[ul_category.children.length - 1];
-
-      
-
-      // ul.find('li:first').clone(true).appendTo(ul);
-
-      // let node = document.createElement("li");
-
-      // content_loading = `
-      //   <div class="catalog-item">
-          
-      //     <div class="header-row">
-      //       <span class="category-item-title">Titulo</span>
-      //       <img src="/assets/delete.png" onclick="delTip(this)">
-      //     </div>
-
-      //       <div class="content-row">
-      //       <div class="col">
-      //         <div class="row">
-      //           <img class="thumbnail" src="<%= recomendation.image %>">
-      //         </div>
-      //       </div>
-      //     </div>
-
-      //   </div>`;
-
-      // let textnode = document.createTextNode(content_loading);
-      // node.appendChild(textnode);
-
-      // document.getElementById(category_id).appendChild(node);
     });
   }
 }
@@ -133,8 +117,8 @@ function delTip(element)
   if (li_tip_id.hasAttribute('id') == true)
   {
     swal({
-      title: text_are_you_are,
-      text: text_are_you_are_2,
+      title: "Você tem certeza?",
+      text: "",
       icon: "warning",
       buttons: true,
       dangerMode: true,
@@ -144,7 +128,7 @@ function delTip(element)
         
         element.closest("li").remove();
 
-        swal(text_remove_sucess, {
+        swal("Link removido com sucesso.", {
           icon: "success",
         });
 

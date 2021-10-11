@@ -16,14 +16,18 @@ class Users::PiidController < ApplicationController
       else
         category = Category.find_by_id(params[:category_id])
         return not_found_crude unless category.present?
-
-        current_user.recomendations.new(category_id: category.id,
-                                        title: og_title, 
-                                        image: og_image, 
-                                        link: params[:link]).save!
+        
+        recommendation = Recomendation.new 
+        recommendation.user_id = current_user.id
+        recommendation.category_id = category.id
+        recommendation.title = og_title
+        recommendation.link = params[:link]
+        recommendation.image = og_image
+        
+        recommendation.save!
       end
 
-      render json: {og_title: og_title, og_image: og_image}, status: 200
+      render json: {tip_id: recommendation.id, og_title: og_title, og_title: og_title, og_image: og_image}, status: 200
     else
       render json: {}, status: 404
     end
