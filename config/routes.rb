@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/',                                          to: 'dashboard#show', as: :root_user 
   get 'analytics',                                  to: 'analytics#show'
   get 'analytics/:user_id/:type_analytic/:type_id', to: 'analytics#increment'
+
   get 'see_your_email',                             to: 'pages#see_your_email'  
   get 'welcome',                                    to: 'pages#welcome'
 

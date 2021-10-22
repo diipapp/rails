@@ -11,10 +11,6 @@ class AnalyticsController < ApplicationController
       not_found_crude unless @category.present?
     when "tip"
       @tip = Recomendation.find_by_id(params[:type_id])
-
-
-      raise "================== #{params[:type_id]}"
-      
       not_found_crude unless @tip.present?
     end
     
