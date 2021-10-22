@@ -11,12 +11,14 @@ class AnalyticsController < ApplicationController
       not_found_crude unless @category.present?
     when "tip"
       @tip = Recomendation.find_by_id(params[:type_id])
+
+
+      raise "================== #{params[:type_id]}"
+      
       not_found_crude unless @tip.present?
     end
     
     @user.analytics.increment(@user.id, params['type_analytic'], params['type_id'])
-
-    raise "================== #{@tip.link }"
 
     redirect_to @tip.link if params[:type_analytic] == "tip"
   end  
