@@ -24,7 +24,7 @@ module DockerRails
     config.hosts = [
       "localhost",
       "www.diip.app",
-      "0281-2804-14c-9b83-8f0f-8c17-1620-652a-966e.ngrok.io"
+      "diip-ror.herokuapp.com"
     ]    
   end
 end
