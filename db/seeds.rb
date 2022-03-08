@@ -10,6 +10,3 @@ Category.create(name: "Beleza", emoji: "💄", order: 7)
 Category.create(name: "Comida", emoji: "🍔", order: 8)
 Category.create(name: "Cursos", emoji: "🎓", order: 9)
 Category.create(name: "Eletrônicos", emoji: "💻", order: 10)
-
-
-
