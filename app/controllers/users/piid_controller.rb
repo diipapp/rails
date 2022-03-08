@@ -53,7 +53,7 @@ class Users::PiidController < ApplicationController
         og_title = page.at('meta[property="og:title"]')['content']
         og_image = page.at('meta[property="og:image"]')['content']
       else
-        response = HTTParty.get("https://opengraph.io/api/1.1/site/#{CGI.escape(link)}?accept_lang=auto&use_proxy=true&app_id=69d07e6b-13fc-4215-915d-8fbf529db9a2", format: :json)
+        response = HTTParty.get("https://opengraph.io/api/1.1/site/#{CGI.escape(link)}?accept_lang=auto&use_proxy=true&app_id=33e4f14b-aa91-4ff4-8ad4-130835b50a54", format: :json)
        
         
 
